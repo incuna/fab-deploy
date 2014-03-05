@@ -3,12 +3,12 @@ from fabric.contrib.files import exists
 
 
 @task
-def manage(command, manage='manage.py'):
+def manage(command, manage='manage.py', envdir='env'):
     """Run a django management command. e.g. deploy.manage:syncdb"""
     with cd(env.site_path):
         cmd = './bin/python {0} {1}'.format(manage, command)
-        if run('$([ -d env ]) && echo 1 || echo 0') == '1':
-            cmd = 'envdir env {0}'.format(cmd)
+        if envdir:
+            cmd = 'envdir {0} {1}'.format(envdir, cmd)
         run(cmd)
 
 
