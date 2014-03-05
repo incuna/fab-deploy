@@ -1,0 +1,44 @@
+from fabric.api import cd, env, run, sudo, task
+from fabric.contrib.files import exists
+
+
+@task
+def manage(command, manage='manage.py'):
+    """Run a django management command. e.g. deploy.manage:syncdb"""
+    with cd(env.site_path):
+        cmd = './bin/python {0} {1}'.format(manage, command)
+        if run('$([ -d env ]) && echo 1 || echo 0') == '1':
+            cmd = 'envdir env {0}'.format(cmd)
+        run(cmd)
+
+
+@task
+def pip(requirements_file='requirements.txt'):
+    """Run pip install."""
+    with cd(env.site_path):
+        if exists(requirements_file):
+            run('./bin/pip install -r {0}'.format(requirements_file))
+
+
+@task
+def pull():
+    """Run git pull."""
+    with cd(env.site_path):
+        run('git pull')
+
+
+@task
+def supervisor(command):
+    """Run a supervisorctl command. e.g. deploy.supervisor:'restart all'"""
+    sudo('supervisorctl {0}'.format(command))
+
+
+@task
+def update():
+    """Update the site folder."""
+    pip()
+    pull()
+    manage('migrate')
+    manage('syncdb --all')
+    manage('collectstatic --noinput')
+    supervisor('restart all')
