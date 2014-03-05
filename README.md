@@ -1,10 +1,10 @@
-# fab-deploy
+# fab-django-deploy
 
 Fabric tasks to help deploying and updating django sites.
 
 ## Installation
 
-    pip install fab-deploy
+    pip install fab-django-deploy
     
 
 Create a `fabfile.py`

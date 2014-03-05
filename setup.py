@@ -10,14 +10,14 @@ install_requires = (
 
 
 setup(
-    name='fab-deploy',
+    name='fab-django-deploy',
     packages=find_packages(),
     version=version,
     description='',
     long_description='',
     author='incuna',
     author_email='admin@incuna.com',
-    url='https://github.com/incuna/fab-deploy/',
+    url='https://github.com/incuna/fab-django-deploy/',
     install_requires=install_requires,
     zip_safe=False,
 )
