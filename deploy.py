@@ -1,10 +1,11 @@
-from fabric.api import cd, env, run, sudo, task
+from fabric.api import cd, env, require, run, sudo, task
 from fabric.contrib.files import exists
 
 
 @task
 def manage(command, manage='manage.py', envdir='env'):
     """Run a django management command. e.g. deploy.manage:syncdb"""
+    require('site_path')
     with cd(env.site_path):
         cmd = './bin/python {0} {1}'.format(manage, command)
         if envdir:
@@ -15,6 +16,7 @@ def manage(command, manage='manage.py', envdir='env'):
 @task
 def pip(requirements_file='requirements.txt'):
     """Run pip install."""
+    require('site_path')
     with cd(env.site_path):
         if exists(requirements_file):
             run('./bin/pip install -r {0}'.format(requirements_file))
@@ -23,6 +25,7 @@ def pip(requirements_file='requirements.txt'):
 @task
 def pull():
     """Run git pull."""
+    require('site_path')
     with cd(env.site_path):
         run('git pull')
 
