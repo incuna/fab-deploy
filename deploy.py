@@ -39,8 +39,8 @@ def supervisor(command):
 @task
 def update():
     """Update the site folder."""
-    pip()
     pull()
+    pip()
     manage('migrate')
     manage('syncdb --all')
     manage('collectstatic --noinput')
