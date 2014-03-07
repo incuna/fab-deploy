@@ -41,7 +41,7 @@ def update():
     """Update the site folder."""
     pull()
     pip()
+    manage('syncdb')
     manage('migrate')
-    manage('syncdb --all')
     manage('collectstatic --noinput')
     supervisor('restart all')
