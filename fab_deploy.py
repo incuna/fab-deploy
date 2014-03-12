@@ -33,7 +33,7 @@ def pull():
 @task
 def supervisor(command):
     """Run a supervisorctl command. e.g. deploy.supervisor:'restart all'"""
-    sudo('supervisorctl {0}'.format(command))
+    sudo('supervisorctl {0}'.format(command), shell=False)
 
 
 @task
