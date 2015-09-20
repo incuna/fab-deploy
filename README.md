@@ -21,10 +21,10 @@ Create a `fabfile.py`
 
 Run `fab -ls` to see a list of commads
     
->Available commands:
->
->    fab_deploy.manage      Run a django management command. e.g. fab_deploy.manage:syncdb
->    fab_deploy.pip         Run pip install.
->    fab_deploy.pull        Run git pull.
->    fab_deploy.supervisor  Run a supervisorctl command. e.g. fab_deploy.supervisor:'restart all'
->    fab_deploy.update      Update the site folder.
+## Available commands:
+
+- `fab_deploy.manage`      Run a django management command. e.g. `fab_deploy.manage:syncdb`
+- `fab_deploy.pip`         Run pip install.
+- `fab_deploy.pull`        Run git pull.
+- `fab_deploy.supervisor`  Run a supervisorctl command. e.g. `fab_deploy.supervisor:'restart all'`
+- `fab_deploy.update`      Update the site folder.
